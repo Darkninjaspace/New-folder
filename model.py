@@ -61,11 +61,13 @@ coffeeShop = ConditionalCategorical(
 
 model = BayesianNetwork()
 
-model.add_distributions ([rain, maintenence, train]) #add all probabilities here
+model.add_distributions ([rain, maintenence, train, worldCup, coffeeShop]) #add all probabilities here
 
 model.add_edge (rain,maintenence) #edge means that first thing influences the second (adds direction of influence)
 model.add_edge (rain,train)
 model.add_edge (maintenence,train)
+model.add_edge (train, coffeeShop)
+model.add_edge (worldCup, coffeeShop)
 
 #world cup, train affect coffee shop closed
 #rain, maintenence affect train
