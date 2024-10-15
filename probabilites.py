@@ -11,7 +11,7 @@ probability = model.probability(
     torch.as_tensor(
         [
             [
-                rain_values.index("none"),
+                rain_values.index("light"),
                 maintenence_values.index("maintenence"),
                 train_values.index("on time"),
                 worldCup_values.index ("affected"),
