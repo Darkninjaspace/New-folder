@@ -13,7 +13,7 @@ probability = model.probability(
             [
                 rain_values.index("light"),
                 maintenence_values.index("maintenence"),
-                train_values.index("on time"),
+                train_values.index("late"),
                 worldCup_values.index ("affected"),
                 coffeeShop_values.index ("open")
             ],
