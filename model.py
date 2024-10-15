@@ -48,8 +48,13 @@ coffeeShop = ConditionalCategorical(
     [
         [
             [
-                [0,7,0.3]
-            ]
+                [0.7,0.3], #world cup affected train late shop closed, world cup affected train late shop open
+                [0.5,0.5], #world cup affected train on time shop closed, world cup affected train on time shop open
+            ],
+            [
+                [0.4,0.6], #world cup not affected train on time shop closed, world cup affected train on time shop open
+                [0.3,0.7], #world cup not affected train on time shop closed, world cup affected train on time shop open
+            ],
         ]
     ]
 )
