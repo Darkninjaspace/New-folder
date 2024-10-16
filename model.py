@@ -115,6 +115,9 @@ model.add_edge (rain,train)
 model.add_edge (maintenence,train)
 model.add_edge (train, coffeeShop)
 model.add_edge (worldCup, coffeeShop)
+model.add_edge (rain, reception)
+model.add_edge (rain, carCrash)
+model.add_edge (worldCup, carCrash)
 
 #world cup, train affect coffee shop closed
 #rain, maintenence affect train
