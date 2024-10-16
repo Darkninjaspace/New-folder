@@ -24,8 +24,8 @@ probability = model.probability(
                 reception_values.index ("interference"),
                 carCrash_values.index ("crash"),
                 survival_values.index ("survival"),
-                womanDoctor_values.index ("female")
-            ],
+                womanDoctor_values.index ("female"),
+            ]
         ]
     )
 )

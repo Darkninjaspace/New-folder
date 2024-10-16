@@ -61,17 +61,9 @@ coffeeShop = ConditionalCategorical(
 
 reception = ConditionalCategorical(
     [
-        [
-            [
-                [0.95,0.05], #no rain yes interference, no rain no interference
-            ],
-            [
-                [0.9,0.1], #light rain yes interference, light rain no interference
-            ],
-            [
-                [0.75,0.25], #heavy rain yes interference, heavy rain no interference
-            ],
-        ]
+        [0.95,0.05], #no rain yes interference, no rain no interference
+        [0.9,0.1], #light rain yes interference, light rain no interference
+        [0.75,0.25], #heavy rain yes interference, heavy rain no interference
     ]
 )
 
