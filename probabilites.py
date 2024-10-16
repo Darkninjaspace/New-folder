@@ -22,9 +22,9 @@ probability = model.probability(
                 worldCup_values.index ("affected"),
                 coffeeShop_values.index ("closed"),
                 reception_values.index ("interference"),
-                carCrash_values ("crash"),
-                survival_values ("survival"),
-                womanDoctor_values ("female")
+                carCrash_values.index ("crash"),
+                survival_values.index ("survival"),
+                womanDoctor_values.index ("female")
             ],
         ]
     )
