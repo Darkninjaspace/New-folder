@@ -108,7 +108,7 @@ womanDoctor = Categorical(
 
 model = BayesianNetwork()
 
-model.add_distributions ([rain, maintenence, train, worldCup, coffeeShop]) #add all probabilities here
+model.add_distributions ([rain, maintenence, train, worldCup, coffeeShop, reception, carCrash, survival, womanDoctor]) #add all probabilities here
 
 model.add_edge (rain,maintenence) #edge means that first thing influences the second (adds direction of influence)
 model.add_edge (rain,train)
