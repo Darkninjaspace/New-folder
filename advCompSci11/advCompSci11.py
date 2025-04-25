@@ -1,14 +1,5 @@
 import pandas as pd
 
-"""data = {
-   'defensive' : [-0.9, 1.3, -0.4, 4.4, -2.2, 2.2, -1.7, -1.7, 2.2, -8.2, -4.7, -0.9, 0.8, 2, -1.2, -1.1, -5.3, -2.9, -8.3, 5.6],
-   'offensive' : [-2.9, 2.5, -3, -3.8, 1.8, 0.2, -0.8, -1.5, 0.2, -3.9, 2.9, -2.9, -5, -1, 0.3, -1.6, 2.6, -6, 5.8, -3.5],
-   'win/loss' : ["L", "W", "L", "W", "W", "W", "L", "W", "W", "L", "W", "W", "L", "L", "L", "W", "W", "L", "W", "W"]
-
-}
-
-df = pd.DataFrame(data)"""
-
 df = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Lakers Spreadsheet - Sheet1.csv")
 
 new_game = (0, 0)
@@ -28,8 +19,8 @@ def find_likelihood(new_game, df):
    for i in range(1, len(df)):
       new_game_x = new_game[0]
       new_game_y = new_game[1]
-      if find_distance(new_game_x,new_game_y, int(df['Defensice'][i]), int(df['Offensive'][i])) <= 2:
-         possible_wins.append((int(df['Defensice'][i]), int(df['Offensive'][i]), df['win/loss'][i]))
+      if find_distance(new_game_x,new_game_y, int(df['Defensive'][i]), int(df['Offensive'][i])) <= 2:
+         possible_wins.append((int(df['Defensive'][i]), int(df['Offensive'][i]), df['W/L'][i]))
          
    for i in possible_wins:
       if i[2] == "L":
@@ -45,9 +36,14 @@ def find_likelihood(new_game, df):
    else:
       return "Loss"
 
+"""data = {
+   'defensive' : [-0.9, 1.3, -0.4, 4.4, -2.2, 2.2, -1.7, -1.7, 2.2, -8.2, -4.7, -0.9, 0.8, 2, -1.2, -1.1, -5.3, -2.9, -8.3, 5.6],
+   'offensive' : [-2.9, 2.5, -3, -3.8, 1.8, 0.2, -0.8, -1.5, 0.2, -3.9, 2.9, -2.9, -5, -1, 0.3, -1.6, 2.6, -6, 5.8, -3.5],
+   'win/loss' : ["L", "W", "L", "W", "W", "W", "L", "W", "W", "L", "W", "W", "L", "L", "L", "W", "W", "L", "W", "W"]
 
-   """ 
-         
+}
+
+df = pd.DataFrame(data)  
    
    frontier.append(possible_wins[0])
    for i in possible_wins:
