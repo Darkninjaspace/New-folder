@@ -4,43 +4,49 @@ df = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Laker
 df = df[['Defensive', 'Offensive', 'W/L']]
 
 
-new_game = (-4, -1)
+new_game = (0, 0)
 
 
 def find_distance(x, y, x1, y1):
    
    
    # x = df.loc[df[a, 'defensive']].values[0]
-   return ((x - y)**2 + (x1 - y1)**2)**(1/2)
+   return ((x - x1)**2 + (y - y1)**2)**(1/2)
 
 def find_likelihood(new_game, df):
    possible_wins = []
    win_likelihood = 0
    loss_likelihood = 0
+   won_games = 0
+   lost_games = 0
 
    for i in range(0, len(df),1):
       new_game_x = new_game[0]
       new_game_y = new_game[1]
       print(df['Defensive'][i], df['Offensive'][i])
-      print(find_distance(new_game_x, new_game_y, float(df['Defensive'][i]), float(df['Offensive'][i])))
-      if find_distance(new_game_x,new_game_y, float(df['Defensive'][i]), float(df['Offensive'][i])) <= 4:
-         possible_wins.append((float(df['Defensive'][i]), float(df['Offensive'][i]), df['W/L'][i]))
-         
+      dist_val = find_distance(new_game_x, new_game_y, float(df['Defensive'][i]), float(df['Offensive'][i]))
+      
+      if dist_val <= 2.5:
+         possible_wins.append((float(df['Defensive'][i]), float(df['Offensive'][i]), df['W/L'][i],dist_val))
+
    for i in possible_wins:
       if i[2] == "L":
-         loss_likelihood += 1
+         lost_games += 1
+         loss_likelihood += 1/i[3]
       else:
-         win_likelihood += 1
+         won_games += 1
+         win_likelihood += 1/i[3]
    
    print("Possible win: ", possible_wins)    
-   print("Win likelihood: ", win_likelihood, "Loss likelihood: ", loss_likelihood)
+   print("Win likelihood: ", win_likelihood, "won games:", won_games, "Loss likelihood: ", loss_likelihood, "lost games:", lost_games)
    print("New game: ", new_game)  
+   
    if win_likelihood > loss_likelihood:
-      return "Win"
+      return f"Win {win_likelihood*100/(win_likelihood + loss_likelihood)}%"
    elif win_likelihood == loss_likelihood:
       return "50/50"
    else:
-      return "Loss"
+      return f"Loss {loss_likelihood*100/(win_likelihood + loss_likelihood)}%"
 
 """data = {
    'defensive' : [-0.9, 1.3, -0.4, 4.4, -2.2, 2.2, -1.7, -1.7, 2.2, -8.2, -4.7, -0.9, 0.8, 2, -1.2, -1.1, -5.3, -2.9, -8.3, 5.6],
