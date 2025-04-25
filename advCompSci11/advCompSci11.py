@@ -1,8 +1,10 @@
 import pandas as pd
 
 df = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Lakers Spreadsheet - Sheet1.csv")
+df = df[['Defensive', 'Offensive', 'W/L']]
 
-new_game = (0, 0)
+
+new_game = (-4, -1)
 
 
 def find_distance(x, y, x1, y1):
@@ -16,11 +18,13 @@ def find_likelihood(new_game, df):
    win_likelihood = 0
    loss_likelihood = 0
 
-   for i in range(1, len(df)):
+   for i in range(0, len(df),1):
       new_game_x = new_game[0]
       new_game_y = new_game[1]
-      if find_distance(new_game_x,new_game_y, int(df['Defensive'][i]), int(df['Offensive'][i])) <= 2:
-         possible_wins.append((int(df['Defensive'][i]), int(df['Offensive'][i]), df['W/L'][i]))
+      print(df['Defensive'][i], df['Offensive'][i])
+      print(find_distance(new_game_x, new_game_y, float(df['Defensive'][i]), float(df['Offensive'][i])))
+      if find_distance(new_game_x,new_game_y, float(df['Defensive'][i]), float(df['Offensive'][i])) <= 4:
+         possible_wins.append((float(df['Defensive'][i]), float(df['Offensive'][i]), df['W/L'][i]))
          
    for i in possible_wins:
       if i[2] == "L":
@@ -33,6 +37,8 @@ def find_likelihood(new_game, df):
    print("New game: ", new_game)  
    if win_likelihood > loss_likelihood:
       return "Win"
+   elif win_likelihood == loss_likelihood:
+      return "50/50"
    else:
       return "Loss"
 
