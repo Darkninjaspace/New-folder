@@ -1,33 +1,40 @@
 import pandas as pd
 
-df = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Lakers Spreadsheet - Sheet1.csv")
-df = df[['Defensive', 'Offensive', 'W/L']]
+df_new = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Test Data.csv")
+df_old = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Lakers Spreadsheet - Sheet1.csv")
+df_new = df_new.rename(columns={
+   'Opposing Def Rtg': 'defensive',
+   'Opposing Off Rtg': 'offensive',
+   'W/L': 'W/L'})
+df_old = df_old.rename(columns={
+   'Defensive': 'defensive',
+   'Offensive': 'offensive',
+   'W/L': 'W/L'})
 
+print(df_new.to_string)
 
-new_game = (0, 0)
+df_new = df_new[['defensive', 'offensive', 'W/L']]
+df_old = df_old[['defensive', 'offensive', 'W/L']]
 
+end_result = []
 
 def find_distance(x, y, x1, y1):
-   
-   
-   # x = df.loc[df[a, 'defensive']].values[0]
    return ((x - x1)**2 + (y - y1)**2)**(1/2)
 
-def find_likelihood(new_game, df):
+def find_likelihood(df_old, new_game):
    possible_wins = []
    win_likelihood = 0
    loss_likelihood = 0
    won_games = 0
-   lost_games = 0
+   lost_games = 0      
 
-   for i in range(0, len(df),1):
+   for i in range(0, len(df_old),1):
       new_game_x = new_game[0]
       new_game_y = new_game[1]
-      print(df['Defensive'][i], df['Offensive'][i])
-      dist_val = find_distance(new_game_x, new_game_y, float(df['Defensive'][i]), float(df['Offensive'][i]))
+      dist_val = find_distance(new_game_x, new_game_y, float(df_old['defensive'][i]), float(df_old['offensive'][i]))
       
       if dist_val <= 2.5:
-         possible_wins.append((float(df['Defensive'][i]), float(df['Offensive'][i]), df['W/L'][i],dist_val))
+         possible_wins.append((float(df_old['defensive'][i]), float(df_old['offensive'][i]), df_old['W/L'][i],dist_val))
 
    for i in possible_wins:
       if i[2] == "L":
@@ -71,9 +78,12 @@ df = pd.DataFrame(data)
       return "Win"
    else:
       return "Loss"""
-   
+for i in range(1,len(df_new)):
+   new_game = (df_new['defensive'][i], df_new['offensive'][i])
+   end_result.append(f"{find_likelihood(df_old, new_game)} game ({i})")
+   print(find_likelihood(df_old, new_game))
 
-print(find_likelihood(new_game, df))
+print(end_result)
 
 """
 game_result = [(defensive, offensive)]
