@@ -1,7 +1,9 @@
 import pandas as pd
+import random
+import math
 
 df_new = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Test Data.csv")
-df_old = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Lakers Spreadsheet - Sheet1.csv")
+df_old = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Updated Lakers Spreadsheet - Games.csv")
 df_new = df_new.rename(columns={
    'Opposing Def Rtg': 'defensive',
    'Opposing Off Rtg': 'offensive',
@@ -11,10 +13,12 @@ df_old = df_old.rename(columns={
    'Offensive': 'offensive',
    'W/L': 'W/L'})
 
-print(df_new.to_string)
+
 
 df_new = df_new[['defensive', 'offensive', 'W/L']]
 df_old = df_old[['defensive', 'offensive', 'W/L']]
+
+print(df_new.to_string,df_old.to_string)
 
 end_result = []
 
@@ -51,7 +55,7 @@ def find_likelihood(df_old, new_game):
    if win_likelihood > loss_likelihood:
       return f"Win {win_likelihood*100/(win_likelihood + loss_likelihood)}%"
    elif win_likelihood == loss_likelihood:
-      return "50/50"
+      return random.choice(["Win 50%", "Loss 50%"])
    else:
       return f"Loss {loss_likelihood*100/(win_likelihood + loss_likelihood)}%"
 
