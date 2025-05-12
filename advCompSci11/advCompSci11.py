@@ -53,64 +53,29 @@ def find_likelihood(df_old, new_game):
    print("New game: ", new_game)  
    
    if win_likelihood > loss_likelihood:
-      return f"Win {win_likelihood*100/(win_likelihood + loss_likelihood)}%"
+      return "W"
+   #f"Win {win_likelihood*100/(win_likelihood + loss_likelihood)}%"
    elif win_likelihood == loss_likelihood:
-      return random.choice(["Win 50%", "Loss 50%"])
+      return random.choice(["L", "W"])
    else:
-      return f"Loss {loss_likelihood*100/(win_likelihood + loss_likelihood)}%"
+      return "L"
+   #f"Loss {loss_likelihood*100/(win_likelihood + loss_likelihood)}%"
 
-"""data = {
-   'defensive' : [-0.9, 1.3, -0.4, 4.4, -2.2, 2.2, -1.7, -1.7, 2.2, -8.2, -4.7, -0.9, 0.8, 2, -1.2, -1.1, -5.3, -2.9, -8.3, 5.6],
-   'offensive' : [-2.9, 2.5, -3, -3.8, 1.8, 0.2, -0.8, -1.5, 0.2, -3.9, 2.9, -2.9, -5, -1, 0.3, -1.6, 2.6, -6, 5.8, -3.5],
-   'win/loss' : ["L", "W", "L", "W", "W", "W", "L", "W", "W", "L", "W", "W", "L", "L", "L", "W", "W", "L", "W", "W"]
+def find_accuracy(end_result, df_new):
+   correct = 0
+   incorrect = 0
+   for i in range(0, len(end_result)):
+      if end_result[i] == df_new['W/L'][i]:
+         correct += 1
+      else:
+         incorrect += 1
+   print("Correct: ", correct, "Incorrect: ", incorrect)
+   return correct/(correct + incorrect)
 
-}
-
-df = pd.DataFrame(data)  
-   
-   frontier.append(possible_wins[0])
-   for i in possible_wins:
-      if find_distance(new_game[0],new_game[1],frontier[0][0], frontier[0][1]) >= find_distance(new_game[0],new_game[1], i[0], i[1]):
-         frontier.clear()
-         frontier.append(i)
-         closest_win = i
-         
-
-   
-
-   if closest_win[0] - new_game[0] and closest_win[1] - new_game[1] <= closest_loss[0] - new_game[0] and closest_loss[1] - new_game[1]: 
-      return "Win"
-   else:
-      return "Loss"""
 for i in range(1,len(df_new)):
    new_game = (df_new['defensive'][i], df_new['offensive'][i])
-   end_result.append(f"{find_likelihood(df_old, new_game)} game ({i})")
+   end_result.append(find_likelihood(df_old, new_game))
    print(find_likelihood(df_old, new_game))
 
-print(end_result)
+print(find_accuracy(end_result, df_new))
 
-"""
-game_result = [(defensive, offensive)]
-possible_wins = []
-possible_losses = []
-win_likelihood = 0
-loss_likelihood = 0
-new_game = (0, 0)
-
-def find_distance(x, y, x1, y1):
-   return ((x - y)**2 + (x1 - y1)**2)**(1/2)
- 
-
-for i in range(1, len(defensive)):
-   selected = 0
-   if find_distance(defensive[selected], offensive[selected], defensive[i], offensive[i]) <= 2:
-      possible_wins.append((defensive[selected], offensive[selected]))
-      selected += 1
-   else:-
-      possible_losses.append((defensive[selected], offensive[selected]))
-      selected += 1
-
-for i in possible_wins:
-   if find_distance(new_game[0], new_game[1], i[0], i[1]):
-      
-   """
