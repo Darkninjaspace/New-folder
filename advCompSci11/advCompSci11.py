@@ -2,6 +2,8 @@ import pandas as pd
 import random
 import math
 
+#goal is to test the 
+
 df_new = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Test Data.csv")
 df_old = pd.read_csv(r"C:\Users\ander\OneDrive\Desktop\New folder\advCompSci11\Updated Lakers Spreadsheet - Games.csv")
 df_new = df_new.rename(columns={
